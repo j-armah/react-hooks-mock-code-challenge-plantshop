@@ -16,7 +16,7 @@
       "id": 3,
       "name": "Pilea peperomioides",
       "image": "./images/pilea.jpg",
-      "price": 5.99
+      "price": 7.77
     },
     {
       "id": 4,
@@ -41,12 +41,6 @@
       "name": "Fiddle Leaf Fig",
       "image": "./images/fiddle-leaf-fig.jpg",
       "price": 55
-    },
-    {
-      "name": "Happy Meal",
-      "image": "https://i.redd.it/h3u4akn5vmy31.jpg",
-      "price": 9.99,
-      "id": 8
     }
   ]
 }

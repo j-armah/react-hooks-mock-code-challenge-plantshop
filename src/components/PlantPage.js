@@ -31,6 +31,42 @@ function PlantPage() {
     })
   }
 
+  const handlePriceUpdate = (id, priceObj) => {
+    //console.log(id, priceObj)
+    fetch(`http://localhost:6001/plants/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(priceObj)
+    })
+    .then(r =>  r.json())
+    .then(data => {
+      console.log(data)
+      const updateP = plants.map(plant => {
+        if (plant.id === id) {
+          return {...plant, price: priceObj.price}
+        } else {
+          return plant
+        }
+      })
+      //console.log(updateP)
+      setPlants(updateP)
+    })
+  }
+
+  const handleDelete = (id) => {
+    //console.log(id)
+    fetch(`http://localhost:6001/plants/${id}`, {
+      method: "DELETE"
+    })
+    .then(r => r.json())
+    .then(data => {
+      const updateP = plants.filter(plant => plant.id !== id)
+      setPlants(updateP)
+    })
+  }
+
   const filteredPlants = plants.filter(plant => {
     return plant.name.toLowerCase().includes(search)
   })
@@ -40,7 +76,11 @@ function PlantPage() {
     <main>
       <NewPlantForm newPlant={handleNewPlant}/>
       <Search onSearch={setSearch}/>
-      <PlantList plants={filteredPlants}/>
+      <PlantList 
+        plants={filteredPlants} 
+        priceUpd={handlePriceUpdate}
+        onDelete={handleDelete}
+      />
     </main>
   );
 }
